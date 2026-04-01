@@ -40,6 +40,7 @@ If any older wording conflicts with this section, this section wins.
 | `patch-bypass-auditor` | patch-bypass candidate evidence | no | no |
 | `vuln-reporter` | DKTSS and 9-field report | yes, after coordinator verdict | no |
 | `chain-synthesizer` | confirmed-path synthesis and handoff packaging | yes, for path packaging only | no |
+| adversarial-simulator | 执行 Red Team 对抗性绕过分析 + Bypass Feasibility Matrix 生成 + PoC 思路 | no | no |
 
 ## Hardening Overrides
 
