@@ -176,9 +176,11 @@ When Burp identifies new `.NET` surfaces:
 5. Continue automatically or pause depending on mode.
 6. Dispatch `module-scanner` across module slices.
 7. Route specialist questions to `taint-analyst`, `gadget-hunter`, or `patch-bypass-auditor`.
-8. Finalize lifecycle states locally.
-9. Send finalized reportable findings to `vuln-reporter`.
-10. Send finalized finding index to `chain-synthesizer`.
+7.5. 对所有 CANDIDATE+ finding，**强制调用 adversarial-simulator 子代理** 执行完整 **Adversarial Analysis Protocol** 并生成 Bypass Feasibility Matrix。
+7.6. 在 `vuln-reporter` 输出最终报告前，**必须经过 Verifier 自批判环节**（尝试证伪每一个 CONFIRMED finding，证明其是否为 FP 或不可达）。
+9. Finalize lifecycle states locally.
+10. Send finalized reportable findings to `vuln-reporter`.
+11. Send finalized finding index to `chain-synthesizer`.
 
 ## Coverage Policy
 
