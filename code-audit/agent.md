@@ -19,8 +19,8 @@ Use this coordinator when the user asks for:
 If any older wording conflicts with this section, this section wins.
 
 - `SKILL.md` owns lifecycle semantics and formal-finding eligibility.
-- bundled `subagents/` prompts are the versioned source of truth for specialist behavior.
-- external `.claude/agents/*.md` copies are deployment mirrors and must stay byte-identical to `subagents/`.
+- bundled `agents/` prompts are the versioned source of truth for specialist behavior.
+- external `.claude/agents/*.md` copies are deployment mirrors and must stay byte-identical to `agents/`.
 - `audit-intel` owns recon and activation hints.
 - `module-scanner` owns module-local coverage and pre-findings.
 - `taint-analyst` owns sanitizer, second-order, and LLM taint reasoning.
@@ -40,7 +40,7 @@ If any older wording conflicts with this section, this section wins.
 | `patch-bypass-auditor` | patch-bypass candidate evidence | no | no |
 | `vuln-reporter` | DKTSS and 9-field report | yes, after coordinator verdict | no |
 | `chain-synthesizer` | confirmed-path synthesis and handoff packaging | yes, for path packaging only | no |
-| adversarial-simulator | 执行 Red Team 对抗性绕过分析 + Bypass Feasibility Matrix 生成 + PoC 思路 | no | no |
+| `adversarial-simulator` | 执行 Red Team 对抗性绕过分析 + Bypass Feasibility Matrix 生成 + PoC 思路 | no | no |
 
 ## Hardening Overrides
 
