@@ -69,7 +69,8 @@ Keep the primary prompts small and stable while recovering depth by loading the 
 | Infra / CI / supply chain | `references/security/infra_supply_chain.md`, `references/security/dependencies.md` |
 | Patch bypass | `references/core/bypass_strategies.md`, `references/core/version_boundaries.md` |
 | Deserialization | `references/checklists/deserialization_filter_bypass.md`, plus platform-specific language files |
-| adversarial analysis, bypass feasibility, red team simulation → | `references/core/bypass_feasibility_matrix.md` + `agents/adversarial-simulator.md` |
+- adversarial analysis, bypass feasibility, red team simulation → references/core/bypass_feasibility_matrix.md + agents/adversarial-simulator.md
+- advanced taint, second-order, reflection taint, async contamination → references/core/advanced_taint_propagation.md
 
 ## Historical Corpus Routing (WooYun)
 
