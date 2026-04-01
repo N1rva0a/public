@@ -102,16 +102,40 @@ Formal counts include only:
 - `E1`: attacker-controlled input or control gap
 - `E2`: real dangerous sink or real missing control
 - `E3`: reachable path
-- `E4`: defense assessment
+- `E4`: defense assessment completed **+ Adversarial Analysis Protocol executed with Bypass Feasibility Matrix**
 - `E5`: real impact
 - `E6`: chain or expansion value
+
+- ### Adversarial Analysis Protocol (对抗性审查协议) - 必须强制执行
+
+对于每一个 CANDIDATE 及以上 finding，审计师必须立即切换 **Red Team 视角**（你拥有完整源代码、生产部署环境、全部配置权限，是最高权限的攻击者）：
+
+1. **主动枚举真实 Bypass 向量**（至少列出 3 种以上攻击者常用手法）：
+   - Framework 默认防护绕过（配置覆盖、注解禁用、order 优先级、环境变量、热加载等）
+   - Reflection / DI / Proxy / Decorator / AOP / Dynamic Proxy / Metaprogramming 注入
+   - Second-order taint / Persistent storage / Cache / MQ / Event Bus / Async contamination
+   - Race condition / TOCTOU / 状态机覆盖 / 并发逻辑
+   - Version boundary / 未打全补丁 / Dev vs Prod / 环境差异绕过
+   - Control-flow flattening、opaque predicates、split-sink、delayed execution 等对抗静态分析/LLM 的技巧
+   - LLM / Agent / Tool-calling 信任边界污染
+
+2. **Bypass Feasibility Assessment**（必须输出以下标准化矩阵）：
+   | Bypass 向量                  | 可行性 (High/Med/Low) | 具体代码路径/证据/行号          | 当前防御是否可被绕过 |
+   |-----------------------------|-----------------------|---------------------------------|---------------------|
+
+3. **结论规则**：
+   - 只有**所有 High/Med 可行性 Bypass 向量**均被**有效、不可绕过地**缓解，才允许 E4 判定为“充分防御”。
+   - 否则**不得**提升至 CONFIRMED，必须保持 PROBABLE 或 HYPOTHESIS。
+   - 所有分析必须附带**真实代码路径 + 行号 + 调用栈证据**，禁止任何“理论上”“可能”等模糊表述。
+
+4. 本协议由 `adversarial-simulator` 子代理执行，或在 `taint-analyst` / `patch-bypass-auditor` 中强制集成。
 
 Promotion guidance:
 
 - `CANDIDATE`: real signal worth tracing
 - `PROBABLE`: E1 to E3 mostly closed, with one important gap left in defense or impact
 - `HYPOTHESIS`: larger evidence gaps remain
-- `CONFIRMED`: E1 to E5 closed and report contract complete
+- `CONFIRMED`: E1 to E5 closed and report contract complete，且 Adversarial Analysis Protocol 已完成，所有 High/Med Bypass 向量均被充分不可绕过地缓解
 - `CHAINED`: multiple confirmed findings form a stronger attack path
 
 ## Modes
